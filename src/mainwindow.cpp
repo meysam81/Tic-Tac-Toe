@@ -65,11 +65,9 @@ void MainWindow::playerMoveHandler(QPushButton *btn)
     if ( mGame->gameWon() ) {
         // the last move was from the player so he is the winner
         gameEnded("You Won");
-        return;
     } else if ( mGame->gameDraw() ) {
         // if there is no winner and all the cells are filled
         gameEnded("Draw");
-        return;
     }
 
     std::pair<short, short> computer = mGame->computerMove();
@@ -80,6 +78,9 @@ void MainWindow::playerMoveHandler(QPushButton *btn)
     if ( mGame-> gameWon() ) {
         // the computer made the last move so he is the winner
         gameEnded("You Lost");
+    } else if ( mGame->gameDraw() ) {
+        // if there is no winner and all the cells are filled
+        gameEnded("Draw");
     }
 }
 
