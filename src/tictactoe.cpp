@@ -1,5 +1,6 @@
 #include <tictactoe.h>
 #include <math.h>
+#include <vector>
 #include <stdexcept>
 
 TicTacToe::TicTacToe(bool startWithCircle)
