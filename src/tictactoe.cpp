@@ -3,8 +3,14 @@
 #include "stdexcept"
 #include "vector"
 
-TicTacToe::TicTacToe(Mark startMark) : mNextMark(startMark)
+TicTacToe::TicTacToe(bool startWithCircle)
 {
+    if (startWithCircle) {
+        mNextMark = CIRCLE;
+    } else {
+        mNextMark = CROSS;
+    }
+
     resetGame();
 }
 
@@ -13,25 +19,20 @@ TicTacToe::~TicTacToe()
     delete[] cells;
 }
 
-void TicTacToe::setMark(short row, short col, TicTacToe::Mark mark)
+void TicTacToe::setNextMarkOn(short row, short col)
 {
     if (row >= mNumOfRows || col >= mNumOfCols) {
         throw std::invalid_argument("Invalid row or column requested!");
     }
-    cells[row][col] = mark;
+    cells[row][col] = mNextMark;
 
-    if (mark == CIRCLE) {
+    if (mNextMark == CIRCLE) {
         mNextMark = CROSS;
-    } else if (mark == CROSS) {
+    } else if (mNextMark == CROSS) {
         mNextMark = CIRCLE;
     }
 
     mMove++;
-}
-
-TicTacToe::Mark TicTacToe::mark(short row, short col) const
-{
-    return cells[row][col];
 }
 
 bool TicTacToe::gameWon() const

@@ -98,8 +98,8 @@ short MainWindow::calculateIndex(short row, short col) const
 
 void MainWindow::applyButtonMark(QPushButton *button, short row, short col)
 {
-    changeButtonMark(button, mGame->nextMark());
-    mGame->setMark(row, col, mGame->nextMark());
+    changeButtonMark(button, true);
+    mGame->setNextMarkOn(row, col);
 }
 
 
@@ -110,18 +110,16 @@ void MainWindow::on_buttonClicked()
     playerMoveHandler(button);
 }
 
-void MainWindow::changeButtonMark(QPushButton *btn)
+void MainWindow::changeButtonMark(QPushButton *btn, bool gameNextMark)
 {
-    // this member function is to clear the button marks
-    btn->setIcon(QIcon());
-}
-
-void MainWindow::changeButtonMark(QPushButton *btn, TicTacToe::Mark mark)
-{
-    if ( mark == TicTacToe::CIRCLE ) {
-        btn->setIcon(mCircleLogo);
-    } else if (mark == TicTacToe::CROSS) {
-        btn->setIcon(mCrossLogo);
+    if (gameNextMark) {
+        if ( mGame->isNextMarkCircle() ) {
+            btn->setIcon(mCircleLogo);
+        } else if ( mGame->isNextMarkCross() ) {
+            btn->setIcon(mCrossLogo);
+        }
+    } else {
+        btn->setIcon(QIcon());
     }
 }
 

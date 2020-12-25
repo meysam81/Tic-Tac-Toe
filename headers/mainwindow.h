@@ -34,8 +34,7 @@ private:
 
     const QSize mButtonSize = QSize(50, 50);  // used both for buttonSize & iconSize
 
-    void changeButtonMark(QPushButton *btn);  // reset button icon
-    void changeButtonMark(QPushButton *btn, TicTacToe::Mark mark);
+    void changeButtonMark(QPushButton *btn, bool gameNextMark = false);
 
     QString encodeButtonName(short row, short col) const;
     std::pair<short, short> decodeButtonName(QString btnName) const;

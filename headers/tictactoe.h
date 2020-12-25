@@ -8,16 +8,10 @@
 class TicTacToe
 {
 public:
-    enum Mark { NONE, CROSS, CIRCLE };
-
-public:
-    TicTacToe(Mark startMark);
+    TicTacToe(bool startWithCircle = true);
     ~TicTacToe();
 
-    void setMark(short row, short col, Mark mark);
-    Mark mark(short row, short col) const;
-
-    Mark nextMark() const { return mNextMark; }
+    void setNextMarkOn(short row, short col);
 
     short numOfRows() const { return mNumOfRows; }
     short numOfCols() const { return mNumOfCols; }
@@ -31,7 +25,12 @@ public:
 
     std::pair<short, short> computerMove();
 
+    bool isNextMarkCircle() const {return mNextMark == CIRCLE; }
+    bool isNextMarkCross() const {return mNextMark == CROSS; }
+
 private:
+    enum Mark { NONE, CROSS, CIRCLE };
+
     const short mNumOfRows = 3, mNumOfCols = 3;
     Mark mNextMark;
 
