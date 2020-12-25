@@ -12,6 +12,8 @@ MainWindow::MainWindow(TicTacToe *game, QWidget *parent)
 {
     ui->setupUi(this);
 
+    mNumPlayed = mNumWon = mNumDrew = mNumLost = 0;
+
     // to place all the customizations in the same place
     initializeBoard();
 }
@@ -64,10 +66,10 @@ void MainWindow::playerMoveHandler(QPushButton *btn)
 
     if ( mGame->gameWon() ) {
         // the last move was from the player so he is the winner
-        gameEnded("You Won");
+        gameEnded(WIN);
     } else if ( mGame->gameDraw() ) {
         // if there is no winner and all the cells are filled
-        gameEnded("Draw");
+        gameEnded(DRAW);
     }
 
     std::pair<short, short> computer = mGame->computerMove();
@@ -77,16 +79,40 @@ void MainWindow::playerMoveHandler(QPushButton *btn)
 
     if ( mGame-> gameWon() ) {
         // the computer made the last move so he is the winner
-        gameEnded("You Lost");
+        gameEnded(LOST);
     } else if ( mGame->gameDraw() ) {
         // if there is no winner and all the cells are filled
-        gameEnded("Draw");
+        gameEnded(DRAW);
     }
 }
 
-void MainWindow::gameEnded(QString msg)
+void MainWindow::gameEnded(GameResult gameResult)
 {
+    mNumPlayed += 1;
+    QString title;
+
+    switch (gameResult) {
+    case WIN:
+        mNumWon += 1;
+        title = "You Won";
+        break;
+    case DRAW:
+        mNumDrew += 1;
+        title = "Draw";
+        break;
+    case LOST:
+        mNumLost += 1;
+        title = "You Lost";
+        break;
+    default:
+        break;
+    }
+
+    QString msg = QString("Played: %1\nWin: %2\nDraw: %3\nLost: %4")
+            .arg(mNumPlayed).arg(mNumWon).arg(mNumDrew).arg(mNumLost);
+
     QMessageBox *dialog = new QMessageBox(this);
+    dialog->setWindowTitle(title);
     dialog->setText(msg);
     dialog->exec();
     clearBoard();
