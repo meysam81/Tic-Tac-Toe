@@ -1,8 +1,7 @@
 #ifndef TICTACTOE_H
 #define TICTACTOE_H
 
-#include <vector>
-#include <stdexcept>
+#include <string>
 
 
 class TicTacToe

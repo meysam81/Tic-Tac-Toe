@@ -1,7 +1,6 @@
-#include "mainwindow.h"
-#include <tictactoe.h>
-
 #include <QApplication>
+#include <mainwindow.h>
+#include <tictactoe.h>
 
 int main(int argc, char *argv[])
 {
