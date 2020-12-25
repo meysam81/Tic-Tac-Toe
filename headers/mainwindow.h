@@ -26,8 +26,8 @@ private:
     TicTacToe *mGame;
 
     // added from Resources section of the project
-    QIcon mCrossLogo = QIcon(":/images/cross.png");
-    QIcon mCircleLogo = QIcon(":/images/circle.png");
+    const QIcon mCrossLogo = QIcon(":/images/cross.png");
+    const QIcon mCircleLogo = QIcon(":/images/circle.png");
 
     ushort mNumberOfButtons;
     QPushButton *mButtons; // an array of push buttons
@@ -45,10 +45,13 @@ private:
 
     void playerMoveHandler(QPushButton* btn);
 
-    void gameEnded(QString msg);
+    enum GameResult { WIN, DRAW, LOST };
+    void gameEnded(GameResult gameResult);
 
     short calculateIndex(short row, short col) const;
 
     void applyButtonMark(QPushButton* button, short row, short col);
+
+    ushort mNumPlayed, mNumWon, mNumDrew, mNumLost;
 };
 #endif // MAINWINDOW_H
