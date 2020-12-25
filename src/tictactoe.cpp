@@ -61,8 +61,8 @@ bool TicTacToe::gameDraw() const
 
 void TicTacToe::resetGame()
 {
-    // TODO: should we do this or do the GC takes care of this? 🤔
-    delete[] cells;
+    // should we do this or do the GC takes care of this? 🤔
+    // delete[] cells;
 
     cells = new Mark*[mNumOfRows];
     for (short i = 0; i < mNumOfRows; i++) {
